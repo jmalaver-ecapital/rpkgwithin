@@ -21,9 +21,10 @@ celsify_temp <- function(dat) {
 }
 
 timestamp <- function(time = Sys.time()) {
-  Sys.setlocale("LC_TIME", "C")
-  Sys.setenv(TZ = "UTC")
-  format(time, "%Y-%B-%d_%H-%M-%S")
+  withr::with_locale(
+    c("LC_TIME" = "C"),
+    format(time, "%Y-%B-%d_%H-%M-%S", tz = "UTC")
+  )
 }
 
 #' @export
